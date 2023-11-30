@@ -74,6 +74,11 @@ elif strategy == 2:
 #    hole_size = 2
 #    mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh).fill_holes(hole_size).to_legacy()
 
+subdiv = True
+if subdiv:
+    mesh = mesh.subdivide_loop(number_of_iterations=2)
+
+
 if sampleData:
     if not low_poly:
         # show both hires mesh and low poly point cloud
