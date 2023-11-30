@@ -19,7 +19,7 @@ if sampleData:
         pcd = pcd_full
 else:
     # Load data
-    filename = "data.xyz"
+    filename = "data.xyz" # "full3Dcoord.csv"  "full3Dcoord.csv"
     pointcloud = np.loadtxt(filename, skiprows=1, delimiter=';')
     ## Format to open3d usable object
     pcd = o3d.geometry.PointCloud()
@@ -68,15 +68,20 @@ elif strategy == 2:
     mesh = p_mesh_crop
 
 
-#fill_holes = False
-#if fill_holes:
-#    # Dont know if I'm using this the right way ...
-#    hole_size = 2
-#    mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh).fill_holes(hole_size).to_legacy()
+fill_holes = False
+if fill_holes:
+    # Dont know if I'm using this the right way ...
+    hole_size = 10
+    mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh).fill_holes(hole_size).to_legacy()
 
-subdiv = True
+
+subdiv = False
 if subdiv:
-    mesh = mesh.subdivide_loop(number_of_iterations=2)
+    # number_of_iterations
+    # 2: not a low-poly feel
+    # 3: pretty smooth
+    # 5: completely smooth
+    mesh = mesh.subdivide_loop(number_of_iterations=5)
 
 
 if sampleData:
