@@ -19,7 +19,7 @@ if sampleData:
         pcd = pcd_full
 else:
     # Load data
-    filename = "data.xyz" # "full3Dcoord.csv"  "full3Dcoord.csv"
+    filename = "flörtkula50_3Dcoord.csv" #"data.xyz" # "full3Dcoord.csv"  "full3Dcoord.csv"
     pointcloud = np.loadtxt(filename, skiprows=1, delimiter=';')
     ## Format to open3d usable object
     pcd = o3d.geometry.PointCloud()
@@ -75,13 +75,13 @@ if fill_holes:
     mesh = o3d.t.geometry.TriangleMesh.from_legacy(mesh).fill_holes(hole_size).to_legacy()
 
 
-subdiv = False
+subdiv = True
 if subdiv:
     # number_of_iterations
     # 2: not a low-poly feel
     # 3: pretty smooth
     # 5: completely smooth
-    mesh = mesh.subdivide_loop(number_of_iterations=5)
+    mesh = mesh.subdivide_loop(number_of_iterations=2)
 
 
 if sampleData:
